@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white/50 relative">
+  <nuxt-link to="/detail" class="bg-white/50 relative">
     <img src="/icon.png" />
-    <div class="absolute w-full pt-20 px-2 pb-2 bottom-0 bg-gradient-to-t from-cyan-500">
+    <div class="absolute w-full h-full px-2 pb-2 bottom-0 bg-gradient-to-t from-cyan-500 hover:opacity-100 opacity-0 transition-opacity">
       <div class="flex items-center space-x-2">
         <div class="rounded-full h-8 w-8 bg-slate-800 p-1">
           <img src="/icon.png" />
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
