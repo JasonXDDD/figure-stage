@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-6 gap-0">
+  <div class="grid grid-cols-2 pad:grid-cols-6 gap-0">
     <card-item v-for="(e, i) in counter(10)" :key="i" />
   </div>
 </template>

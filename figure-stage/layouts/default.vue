@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-header />
-    <main class="ml-60">
+    <main class="pad:ml-60">
       <Nuxt />
     </main>
   </div>
