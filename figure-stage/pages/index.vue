@@ -1,9 +1,6 @@
 <template>
-  <div>
-    hello world
-    <div class="grid grid-cols-6 gap-0">
-      <card-item v-for="(e, i) in counter(10)" :key="i" />
-    </div>
+  <div class="grid grid-cols-6 gap-0">
+    <card-item v-for="(e, i) in counter(10)" :key="i" />
   </div>
 </template>
 

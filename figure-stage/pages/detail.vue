@@ -54,7 +54,7 @@ export default {
         .scroll(true)
         .play()
         .on('show', (n) => {
-          console.log(n)
+          // console.log(n)
         })
     },
   },
