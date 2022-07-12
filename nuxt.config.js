@@ -5,6 +5,9 @@ export default {
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  router: {
+    base: '/figure-stage/'
+  },
 
   server: {
     port: 7777, // default: 3000
