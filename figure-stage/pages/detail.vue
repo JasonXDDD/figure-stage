@@ -1,26 +1,45 @@
 
 <template>
-  <div class="h-100vh w-100vw grid place-items-center">
-    <div class="w-80">
-      <div ref="stage">
-        <img src="https://andrepolischuk.com/circlr/images/00.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/01.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/02.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/03.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/04.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/05.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/06.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/07.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/08.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/09.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/10.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/11.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/12.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/13.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/14.jpg" alt="" />
-        <img src="https://andrepolischuk.com/circlr/images/15.jpg" alt="" />
+  <div>
+    <section
+      ref="stage"
+      class="h-[80vh] w-auto bg-cover bg-no-repeat bg-center"
+      :style="{
+        'background-image': `url(${now})`,
+      }"
+    >
+      <img
+        v-for="(image, imageid) in images"
+        :key="`image-${imageid}`"
+        class="object-contain h-full backdrop-blur-xl backdrop-saturate-200"
+        :src="image"
+        alt=""
+      />
+    </section>
+
+    <section class="p-4">
+      <h2 class="font-bold leading-none text-white text-2xl">Hello World Hello World Hello World Hello World</h2>
+      <div class="w-full mt-2 flex items-center space-x-2">
+        <div class="rounded-full h-8 w-8 bg-slate-800 p-1">
+          <img src="/icon.png" />
+        </div>
+        <small class="text-white">XDD</small>
       </div>
-    </div>
+      <div>
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World
+        Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello
+        World Hello World Hello World Hello World Hello World Hello World
+      </div>
+    </section>
   </div>
 </template>
 
@@ -28,16 +47,34 @@
 import circlr from 'circlr'
 export default {
   name: 'DetailPage',
+  data() {
+    return {
+      now: '',
+      images: [
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/001.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/002.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/003.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/004.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/005.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/006.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/007.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/008.jpg',
+        'https://u0654dj0.github.io/FigureRoom/images/20160619/009.jpg',
+      ],
+    }
+  },
   mounted() {
     this.init()
   },
   methods: {
     init() {
+      const self = this
       circlr(this.$refs.stage)
         .scroll(true)
+        .interval(500)
         .play()
         .on('show', (n) => {
-          // console.log(n)
+          self.now = self.images[n]
         })
     },
   },
