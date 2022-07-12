@@ -12,11 +12,12 @@ export default {
   components: { CardItem },
   data() {
     return {
-      cards: [`${this.router.base}/cover/test1.JPG`],
+      cards: [],
     }
   },
   mounted() {
     this.cards = this.cards.concat(new Array(30).fill('https://bottleneko.app/icon.png'))
+    this.cards[0] = `${this.$router.options.base}/cover/test1.JPG`
   },
   methods: {
     counter(n) {
