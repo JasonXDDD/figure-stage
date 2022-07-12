@@ -42,6 +42,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: cd target folder
+        run: cd ./figure-stage
+
       - name: Install dependencies 👨🏻‍💻
         run: yarn
 
