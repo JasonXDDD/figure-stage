@@ -1,20 +1,17 @@
 
 <template>
   <div>
-    <section
-      ref="stage"
-      class="h-[80vh] w-auto bg-cover bg-no-repeat bg-center"
-      :style="{
-        'background-image': `url(${now})`,
-      }"
-    >
-      <img
+    <section ref="stage">
+      <div
         v-for="(image, imageid) in images"
         :key="`image-${imageid}`"
-        class="object-contain h-full backdrop-blur-xl backdrop-saturate-200"
-        :src="image"
-        alt=""
-      />
+        class="h-[80vh] w-auto bg-cover bg-no-repeat bg-center"
+        :style="{
+          'background-image': `url(${image})`,
+        }"
+      >
+        <img class="object-contain w-full h-full mx-auto backdrop-blur-xl backdrop-saturate-200" :src="image" alt="" rel="preload" />
+      </div>
     </section>
 
     <section class="p-4">
@@ -50,28 +47,19 @@ export default {
   data() {
     return {
       now: '',
-      images: [
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/001.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/002.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/003.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/004.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/005.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/006.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/007.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/008.jpg',
-        'https://u0654dj0.github.io/FigureRoom/images/20160619/009.jpg',
-      ],
+      images: [],
     }
   },
   mounted() {
-    this.init()
+    this.images = new Array(20).fill(0).map((e, i) => `/test1/IMG_${6669 + i}.JPG`)
+    setTimeout(this.init, 500)
   },
   methods: {
     init() {
       const self = this
       circlr(this.$refs.stage)
         .scroll(true)
-        .interval(500)
+        // .interval(300)
         .play()
         .on('show', (n) => {
           self.now = self.images[n]
