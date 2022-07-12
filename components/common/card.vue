@@ -1,6 +1,6 @@
 <template>
   <nuxt-link to="/detail" class="relative">
-    <img src="/icon.png" />
+    <img src="https://bottleneko.app/icon.png" />
     <div
       class="
         absolute
@@ -20,7 +20,7 @@
     >
       <div class="w-full mt-auto flex items-center space-x-2">
         <div class="rounded-full h-8 w-8 bg-slate-800 p-1">
-          <img src="/icon.png" />
+          <img src="https://bottleneko.app/icon.png" />
         </div>
         <div>
           <h2 class="font-bold leading-none text-white">Hello World</h2>

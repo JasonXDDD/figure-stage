@@ -21,7 +21,7 @@
       <h2 class="font-bold leading-none text-white text-2xl">Hello World Hello World Hello World Hello World</h2>
       <div class="w-full mt-2 flex items-center space-x-2">
         <div class="rounded-full h-8 w-8 bg-slate-800 p-1">
-          <img src="/icon.png" />
+          <img src="https://bottleneko.app/icon.png" />
         </div>
         <small class="text-white">XDD</small>
       </div>
