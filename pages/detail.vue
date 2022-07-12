@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    this.images = new Array(20).fill(0).map((e, i) => `/test1/IMG_${6669 + i}.JPG`)
+    this.images = new Array(20).fill(0).map((e, i) => `${this.router.base}/test1/IMG_${6669 + i}.JPG`)
     setTimeout(this.init, 500)
   },
   methods: {

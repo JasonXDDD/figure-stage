@@ -12,7 +12,7 @@ export default {
   components: { CardItem },
   data() {
     return {
-      cards: ['/cover/test1.JPG'],
+      cards: [`${this.router.base}/cover/test1.JPG`],
     }
   },
   mounted() {
