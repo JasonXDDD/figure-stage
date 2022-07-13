@@ -12,7 +12,7 @@
       >
         <nuxt-img
           class="object-contain w-full h-full mx-auto backdrop-blur-xl backdrop-saturate-200"
-          :src="image"
+          :src="`${env === 'development' ? '' : $router.options.base}${image}`"
           alt=""
           :format="image.split('.').pop().toLocaleLowerCase()"
           preload
@@ -55,9 +55,11 @@ export default {
     return {
       now: '',
       images: [],
+      env: '',
     }
   },
   mounted() {
+    this.env = process.env.NODE_ENV
     this.images = new Array(20).fill(0).map((e, i) => `/test1/IMG_${6669 + i}.JPG`)
     setTimeout(this.init, 500)
   },

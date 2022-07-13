@@ -16,6 +16,7 @@ export default {
     }
   },
   mounted() {
+    console.log('<<<<<', process.env.NODE_ENV)
     this.cards = this.cards.concat(new Array(30).fill('https://bottleneko.app/icon.png'))
     this.cards[0] = `${this.$router.options.base}/cover/test1.JPG`
   },
