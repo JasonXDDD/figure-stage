@@ -10,7 +10,14 @@
           'background-image': `url(${image})`,
         }"
       >
-        <img class="object-contain w-full h-full mx-auto backdrop-blur-xl backdrop-saturate-200" :src="image" alt="" rel="preload" />
+        <nuxt-img
+          class="object-contain w-full h-full mx-auto backdrop-blur-xl backdrop-saturate-200"
+          :src="image"
+          alt=""
+          :format="image.split('.').pop().toLocaleLowerCase()"
+          preload
+          :modifiers="{ blur: 10, rotate: 90 }"
+        />
       </div>
     </section>
 
@@ -51,7 +58,7 @@ export default {
     }
   },
   mounted() {
-    this.images = new Array(20).fill(0).map((e, i) => `${this.$router.options.base}/test1/IMG_${6669 + i}.JPG`)
+    this.images = new Array(20).fill(0).map((e, i) => `/test1/IMG_${6669 + i}.JPG`)
     setTimeout(this.init, 500)
   },
   methods: {
