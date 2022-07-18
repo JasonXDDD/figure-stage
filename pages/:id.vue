@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden">
+    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden backdrop-blur-xl">
       <div class="w-screen pad:w-80 px-12 pad:px-0">
         <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
       </div>
