@@ -70,12 +70,121 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    icon: {
+      source: 'icon.png',
+    },
+
+    meta: {
+      viewport: `width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, minimal-ui`,
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'default',
+      name: '展示舞台 Figure Stage',
+      author: 'JasonXDDD',
+      description: `360 rotate picture & display platform`,
+      theme_color: '#e5e5e5',
+      background_color: '#e5e5e5',
+      lang: 'zh-TW',
+      ogHost: 'https://jasonxddd.github.io/figure-stage',
+      nativeUI: true,
+    },
+
     manifest: {
-      lang: 'en'
-    }
+      name: '展示舞台 Figure Stage',
+      short_name: 'Figure Stage',
+      display: 'standalone',
+      start_url: 'https://jasonxddd.github.io/figure-stage/?standalone=true',
+      description: `360 rotate picture & display platform`,
+      background_color: '#e5e5e5',
+      lang: 'zh-TW',
+      orientation: 'portrait',
+      // useWebmanifestExtension: true,
+    },
+
+    workbox: {
+      offlineAnalytics: true,
+      offline: true,
+      offlineStrategy: 'StaleWhileRevalidate',
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: 'https://jasonxddd.github.io/figure-stage/.*',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'bottleNekoCache',
+            cacheableResponse: { statuses: [0, 200] },
+          },
+        },
+        {
+          urlPattern: 'https://fonts.googleapis.com/.*',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'fontCache',
+            cacheableResponse: { statuses: [0, 200] },
+          },
+        },
+        {
+          urlPattern: 'https://jasonxddd.me:9000/.*',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'myImageCache',
+            cacheableResponse: { statuses: [0, 200] },
+          },
+        },
+        {
+          urlPattern: 'https://jasonxddd.me:81/.*',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'cardImageCache',
+            cacheableResponse: { statuses: [0, 200] },
+          },
+        },
+      ],
+    },
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    cache: false,
+    filenames: {
+      chunk: ({ isDev }) => (isDev ? '[name].js' : '[id].[contenthash].js'),
+    },
+    extractCSS: process.env.NODE_ENV === 'production',
+    optimization: {
+      minimize: process.env.NODE_ENV === 'production',
+      splitChunks: {
+        chunks: 'all',
+        minSize: 10000,
+        maxSize: 250000,
+        automaticNameDelimiter: '.',
+        name: undefined,
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
+    extend(config, { isDev, isClient }) {
+      config.module.rules.push({
+        test: /\.worker\.(c|m)?js$/i,
+        exclude: /(node_modules)/,
+        use: [
+          {
+            loader: 'worker-loader',
+            options: {
+              filename: '[name].[contenthash].worker.js',
+              chunkFilename: '[id].[contenthash].worker.js',
+            },
+          },
+        ],
+      })
+    },
+  },
 }
