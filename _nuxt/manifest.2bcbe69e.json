@@ -1,7 +1,7 @@
 {
-  "name": "figure-stage",
-  "short_name": "figure-stage",
-  "description": "## Build Setup",
+  "name": "展示舞台 Figure Stage",
+  "short_name": "Figure Stage",
+  "description": "360 rotate picture & display platform",
   "icons": [
     {
       "src": "/figure-stage/_nuxt/icons/icon_64x64.e3e9fb.png",
@@ -46,8 +46,10 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/figure-stage/?standalone=true",
+  "start_url": "https://jasonxddd.github.io/figure-stage/?standalone=true",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "lang": "en"
+  "background_color": "#e5e5e5",
+  "theme_color": "#e5e5e5",
+  "lang": "zh-TW",
+  "orientation": "portrait"
 }
