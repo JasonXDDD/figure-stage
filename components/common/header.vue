@@ -5,9 +5,9 @@
     </h1>
 
     <nav class="hidden pad:flex flex-col mt-4">
-      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> Gallery </nuxt-link>
-      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> Gallery </nuxt-link>
-      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> Gallery </nuxt-link>
+      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> 作品集 </nuxt-link>
+      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> 關於 </nuxt-link>
+      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> GitHub </nuxt-link>
     </nav>
   </header>
 </template>

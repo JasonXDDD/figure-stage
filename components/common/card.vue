@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="/detail" class="relative">
+  <nuxt-link :to="link" class="relative">
     <img :src="cover" />
     <div
       class="
@@ -19,12 +19,12 @@
       "
     >
       <div class="w-full mt-auto flex items-center space-x-2">
-        <div class="rounded-full h-8 w-8 bg-slate-800 p-1">
+        <div class="rounded-full h-8 w-8 bg-slate-800">
           <img src="https://bottleneko.app/icon.png" class="rounded-full" />
         </div>
         <div>
-          <h2 class="font-bold leading-none text-white">Hello World</h2>
-          <small class="text-white/75 font-thin">XDD</small>
+          <h2 class="font-bold leading-none text-white">{{ title }}</h2>
+          <small class="text-white/50 font-mono">{{ author }}</small>
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
 <script>
 export default {
   name: 'CardItem',
-  props: ['cover'],
+  props: ['cover', 'title', 'author', 'link'],
 }
 </script>
 
