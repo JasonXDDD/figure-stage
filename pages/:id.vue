@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden backdrop-blur-xl">
+    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden">
       <div class="w-screen pad:w-80 px-12 pad:px-0">
         <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
       </div>
@@ -80,7 +80,8 @@ export default {
     },
 
     buildItem(img) {
-      img.className = 'object-contain w-full h-full mx-auto backdrop-blur-xl'
+      img.className = 'object-contain w-full h-full mx-auto'
+      img.style['backdrop-filter'] = 'blur(24px)'
 
       const item = document.createElement('div')
       item.className = 'h-[75vh] pad:h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
