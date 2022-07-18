@@ -1,28 +1,11 @@
 
 <template>
   <div>
-    <section class="h-[80vh] w-auto grid place-items-center">
-      <div class="w-80">
+    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden">
+      <div class="w-screen pad:w-80 px-12 pad:px-0">
         <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
       </div>
       <div v-show="!loading" ref="stage" />
-      <!-- <div
-        v-for="(image, imageid) in images"
-        :key="`image-${imageid}`"
-        class=" bg-cover bg-no-repeat bg-center"
-        :style="{
-          'background-image': `url(${image})`,
-        }"
-      >
-        <nuxt-img
-          class="object-contain w-full h-full mx-auto backdrop-blur-xl backdrop-saturate-200"
-          :src="`${env === 'development' ? '' : $router.options.base}${image}`"
-          alt=""
-          :format="image.split('.').pop().toLocaleLowerCase()"
-          preload
-          :modifiers="{ blur: 10, rotate: 90 }"
-        />
-      </div> -->
     </section>
 
     <section class="p-4">
@@ -100,7 +83,7 @@ export default {
       img.className = 'object-contain w-full h-full mx-auto backdrop-blur-xl'
 
       const item = document.createElement('div')
-      item.className = 'h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
+      item.className = 'h-[75vh] pad:h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
       item.style['background-image'] = `url(${img.src})`
       item.appendChild(img)
       this.$refs.stage.appendChild(item)
