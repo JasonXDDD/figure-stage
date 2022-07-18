@@ -80,8 +80,9 @@ export default {
     },
 
     buildItem(img) {
-      img.className = 'object-contain w-full h-full mx-auto'
+      img.className = 'object-contain w-full h-full mx-auto backdrop-blur-xl'
       img.style['backdrop-filter'] = 'blur(24px)'
+      img.style['-webkit-backdrop-filter'] = 'blur(24px)'
 
       const item = document.createElement('div')
       item.className = 'h-[75vh] pad:h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
