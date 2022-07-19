@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden">
+    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden bg-slate-800/50">
       <div class="w-screen pad:w-80 px-12 pad:px-0">
         <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
       </div>
@@ -54,7 +54,7 @@ export default {
       this.done = 0
       $(this.$refs.progress).ElasticProgress('open')
 
-      this.images = new Array(20).fill(0).map((e, i) => `https://jasonxddd.me:9000/figure-stage/${this.work.link}/${i + 1}.JPG`)
+      this.images = new Array(this.work.total).fill(0).map((e, i) => `https://jasonxddd.me:9000/figure-stage/${this.work.link}/${i + 1}.JPG`)
       const items = await Promise.all(this.images.map((e) => this.initImage(e)))
       // append element to dom
       items.forEach((e) => this.buildItem(e))
