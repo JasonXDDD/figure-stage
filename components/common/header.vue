@@ -3,7 +3,7 @@
     <div class="flex pad:block">
       <h1 class="font-bold hover:text-cyan-300">
         <nuxt-link to="/" class="flex space-x-2 items-center">
-          <img src="icon-black.png" class="h-8" alt="" />
+          <img src="icon.png" class="h-8" alt="" />
           <span class="text-xl"> FigureStage </span>
         </nuxt-link>
       </h1>

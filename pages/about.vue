@@ -5,7 +5,7 @@
         <h2 class="title">關於 FigureStage</h2>
         <p class="subtitle">透過 FigureStage 來展示你的收藏吧！</p>
       </div>
-      <img src="icon-black.png" class="h-20" alt="" />
+      <img src="icon.png" class="rounded-xl h-20" alt="" />
     </div>
     <p class="mt-8 text-white p-8 bg-slate-500/20 rounded-xl">
       FigureStage 是一個
