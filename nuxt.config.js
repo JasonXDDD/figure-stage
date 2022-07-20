@@ -75,7 +75,7 @@ export default {
       mobileApp: true,
       mobileAppIOS: true,
       appleStatusBarStyle: 'default',
-      name: '展示舞台 Figure Stage',
+      name: '展示舞台 FigureStage',
       author: 'JasonXDDD',
       description: `360 rotate picture & display platform`,
       theme_color: '#e5e5e5',
@@ -86,8 +86,8 @@ export default {
     },
 
     manifest: {
-      name: '展示舞台 Figure Stage',
-      short_name: 'Figure Stage',
+      name: '展示舞台 FigureStage',
+      short_name: 'FigureStage',
       display: 'standalone',
       start_url: 'https://jasonxddd.github.io/figure-stage/?standalone=true',
       description: `360 rotate picture & display platform`,

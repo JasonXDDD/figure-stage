@@ -1,12 +1,15 @@
 <template>
   <header class="sticky pad:fixed top-0 z-10 w-full pad:w-60 h-auto pad:h-screen bg-[#20252c] p-4 text-white font-mono">
     <h1 class="font-bold hover:text-cyan-300">
-      <nuxt-link to="/"> Hello World </nuxt-link>
+      <nuxt-link to="/" class="flex space-x-2 items-center">
+        <img src="icon-black.png" class="h-8" alt="" />
+        <span class="text-xl"> FigureStage </span>
+      </nuxt-link>
     </h1>
 
-    <nav class="hidden pad:flex flex-col mt-4">
-      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> 作品集 </nuxt-link>
-      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> 關於 </nuxt-link>
+    <nav class="hidden pad:flex flex-col mt-8">
+      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> 作品 </nuxt-link>
+      <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/about"> 介紹 </nuxt-link>
       <nuxt-link class="hover:bg-white hover:text-black -mx-4 px-4 py-2" to="/"> GitHub </nuxt-link>
     </nav>
   </header>
