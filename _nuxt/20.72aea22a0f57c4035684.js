@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{304:function(e,n,t){"use strict";t.d(n,"a",(function(){return o}));t(773);var o=Object.freeze({cover:"",title:"",author:"",link:""})}}]);
