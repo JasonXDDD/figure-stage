@@ -1,5 +1,5 @@
 <template>
-  <article class="py-8 w-[60rem] mx-auto text-white/80 leading-relaxed font-mono">
+  <article class="p-4 pad:px-0 pad:py-8 w-full pad:w-[60rem] mx-auto text-white/80 leading-relaxed font-mono">
     <div class="flex">
       <div class="mr-auto">
         <h2 class="title">關於 FigureStage</h2>
@@ -19,7 +19,7 @@
     <p>因此，拍攝方法有非常多種，細膩程度與展現效果也有所不同，以下是一個非常簡單便捷的做法提供給您：</p>
 
     <p class="mt-4">首先，您必須準備以下設備：</p>
-    <ul class="list-inside list-disc">
+    <ul class="list-outside pad:list-inside list-disc">
       <li><span class="text-sky-300">手機</span>，或是您有其他的拍攝設備也可以</li>
       <li><span class="text-sky-300">支架</span>，用來固定手機用的</li>
       <li><span class="text-sky-300">模型</span>，您的展示作品</li>
@@ -28,7 +28,7 @@
     </ul>
 
     <p class="mt-4 font-bold">操作步驟：</p>
-    <ul class="list-inside list-decimal">
+    <ul class="list-outside pad:list-inside list-decimal">
       <li>將環境與展示台整理好，並將模型放在展示台正中央</li>
       <li>調整手機將畫面對準模型，嘗試旋轉展示台，確保模型始終保持在中間</li>
       <li>一切準備就緒後，即可開始選轉拍攝</li>
@@ -37,7 +37,7 @@
     </ul>
 
     <p class="mt-4 text-pink-500 font-bold">請注意：</p>
-    <ul class="list-inside list-disc">
+    <ul class="list-outside pad:list-inside list-disc">
       <li>建議可以每隔15度拍攝一次，照片張數會落在20多張左右，會有較好的效果呈現</li>
       <li>若照片張數越多、照片解析度越高，呈現效果會更流暢、更完美，缺點就是載入照片時間會較長</li>
       <li>拍攝時請留意不要震動到手機，展示時就會有突然震動一下的狀況發生</li>
