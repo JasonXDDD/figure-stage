@@ -68,18 +68,19 @@ export default {
   axios: {},
 
   firebase: {
-    // config: {
-    //   apiKey: '<apiKey>',
-    //   authDomain: '<authDomain>',
-    //   projectId: '<projectId>',
-    //   storageBucket: '<storageBucket>',
-    //   messagingSenderId: '<messagingSenderId>',
-    //   appId: '<appId>',
-    //   measurementId: '<measurementId>'
-    // },
-    // services: {
-    //   auth: true // Just as example. Can be any other service.
-    // }
+    config: {
+      apiKey: "AIzaSyCoOrSkURhMUyb3pJgs9CuHUGry2NbRY0U",
+      authDomain: "figure-stage.firebaseapp.com",
+      projectId: "figure-stage",
+      storageBucket: "figure-stage.appspot.com",
+      messagingSenderId: "51011008006",
+      appId: "1:51011008006:web:f6570b0cf2af685d58f587",
+      measurementId: "G-3KZ6BQB23C"
+    },
+    services: {
+      firestore: true,
+      storage: true
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

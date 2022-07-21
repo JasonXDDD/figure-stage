@@ -13,8 +13,17 @@ export default {
   data() {
     return {}
   },
-  mounted() {
+  async mounted() {
     console.log('<<<<<', process.env.NODE_ENV)
+    const collection = this.$fire.firestore.collection('works')
+    const snapshot = await collection.get()
+    const items = snapshot.docs.map((doc) => {
+      const item = doc.data()
+      item.id = doc.id
+      return item
+    })
+
+    console.log(items)
   },
   methods: {
     counter(n) {
