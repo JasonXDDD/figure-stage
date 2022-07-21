@@ -37,6 +37,83 @@ export const state = () => {
         link: 'milk-rabit-robot',
         total: 35
       },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/dark-souls-artorias/cover.jpg',
+        title: '黑暗靈魂：亞爾特留斯',
+        author: 'JasonXDDD',
+        link: 'dark-souls-artorias',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/halo/cover.jpg',
+        title: 'HALO：士官長',
+        author: 'JasonXDDD',
+        link: 'halo',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/hololive-minato-aqua/cover.jpg',
+        title: 'Hololive：湊阿庫婭',
+        author: 'JasonXDDD',
+        link: 'hololive-minato-aqua',
+        total: 40
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/monogatari-oshino-shinobu/cover.jpg',
+        title: '物語系列：忍野忍',
+        author: 'JasonXDDD',
+        link: 'monogatari-oshino-shinobu',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/monogatari-yeah/cover.jpg',
+        title: '物語系列：斧乃木余接',
+        author: 'JasonXDDD',
+        link: 'monogatari-yeah',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/monster-hunter-hunter/cover.jpg',
+        title: '魔物獵人：海龍銃槍',
+        author: 'JasonXDDD',
+        link: 'monster-hunter-hunter',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/monster-hunter-iceborne/cover.jpg',
+        title: '魔物獵人：冰咒龍',
+        author: 'JasonXDDD',
+        link: 'monster-hunter-iceborne',
+        total: 44
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/nier-2b-9s/cover.jpg',
+        title: '尼爾：自動人形',
+        author: 'JasonXDDD',
+        link: 'nier-2b-9s',
+        total: 41
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/princess-connect-redive-kiruya/cover.jpg',
+        title: '公主連結：凱留',
+        author: 'JasonXDDD',
+        link: 'princess-connect-redive-kiruya',
+        total: 44
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/sekiro/cover.jpg',
+        title: 'Sekiro 隻狼',
+        author: 'JasonXDDD',
+        link: 'sekiro',
+        total: 42
+      },
+      {
+        cover: 'https://jasonxddd.me:9000/figure-stage/the-legend-of-zelda-amibo/cover.jpg',
+        title: '薩俺達傳說：阿咪寶',
+        author: 'JasonXDDD',
+        link: 'the-legend-of-zelda-amibo',
+        total: 41
+      },
     ],
   }
 }
