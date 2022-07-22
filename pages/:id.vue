@@ -23,7 +23,7 @@
 
 <script>
 import circlr from 'circlr'
-import { WORK_ITEM } from '~/interface/work'
+import { WorkItem } from '~/interface/work'
 
 export default {
   name: 'DetailPage',
@@ -32,7 +32,7 @@ export default {
       loading: true,
       done: 0,
 
-      work: WORK_ITEM,
+      work: new WorkItem(),
       images: [],
       env: '',
     }
@@ -40,8 +40,8 @@ export default {
   mounted() {
     this.env = process.env.NODE_ENV
 
-    this.work = this.$store.state.works.filter((e) => e.link === this.$route.params.id)[0]
-    if (!this.work) this.$router.go(-1)
+    this.work = this.$store.state.works.filter((e) => e.id === this.$route.params.id)[0]
+    if (!this.work) this.$router.push('/')
     else this.init()
   },
   methods: {
@@ -54,7 +54,7 @@ export default {
       this.done = 0
       $(this.$refs.progress).ElasticProgress('open')
 
-      this.images = new Array(this.work.total).fill(0).map((e, i) => `https://jasonxddd.me:9000/figure-stage/${this.work.link}/${i + 1}.JPG`)
+      this.images = new Array(this.work.total).fill(0).map((e, i) => `https://jasonxddd.me:9000/figure-stage/${this.work.id}/${i + 1}.JPG`)
       const items = await Promise.all(this.images.map((e) => this.initImage(e)))
       // append element to dom
       items.forEach((e) => this.buildItem(e))
