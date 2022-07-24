@@ -9,8 +9,11 @@ export const actions = {
       console.log(res, file.name)
       return targetSrc
     }
-
-
     return await Promise.all(files.map(f => genTask(f)))
+  },
+
+  async download({ commit }, src = '') {
+    const storage = this.$fire.storage.ref()
+    return await storage.child(src).getBlob()
   }
 }
