@@ -3,6 +3,7 @@
     <button @click="add">Test</button>
     <input type="file" accept="image/*" multiple @change="hello" />
     <button @click="addFile">Test File</button>
+    <div ref="test" />
 
     <div class="grid grid-cols-2 pad:grid-cols-6 gap-0">
       <card-item v-for="(e, i) in $store.state.work.works" :key="i" :card="e" />
@@ -13,6 +14,7 @@
 <script>
 import CardItem from '~/components/common/card'
 import { WorkItem } from '~/interface/work'
+import { ImageItem } from '~/interface/image'
 
 export default {
   name: 'IndexPage',
@@ -25,6 +27,7 @@ export default {
   mounted() {
     console.log('<<<<<', process.env.NODE_ENV)
     this.$store.dispatch('work/getWorks')
+    this.loadImage()
   },
   methods: {
     counter(n) {
@@ -36,7 +39,10 @@ export default {
       w.title = 'XDDD'
       w.cover = 'https://jasonxddd.me:9000/figure-stage/no-game-no-life-zero/cover.png'
 
-      await this.$store.dispatch('work/addWork', w)
+      const work = await this.$store.dispatch('work/addWork', w)
+      // const images = await this.addFile(work.id)
+      w.images = []
+      await this.$store.dispatch('work/updateWork', { id: work.id, work: w })
     },
 
     hello(e) {
@@ -44,10 +50,17 @@ export default {
       this.files = Array.from(e.target.files)
     },
 
-    async addFile() {
+    async addFile(docid) {
       console.log(this.files)
-      const res = await this.$store.dispatch('image/upload', this.files)
+      const res = await this.$store.dispatch('image/upload', { docid, files: this.files })
       console.log(res, 'final')
+      return res
+    },
+
+    async loadImage() {
+      const url = await this.$store.dispatch('image/download', '/iamge/303B9B61-3B1D-4C7B-B52D-DB5D0B051DD9_1_105_c.jpeg')
+      const image = new ImageItem({ url })
+      this.$refs.test.append(await image.image())
     },
   },
 }

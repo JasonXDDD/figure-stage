@@ -31,7 +31,17 @@ export const actions = {
 
   async addWork({ dispatch, commit }, work = new WorkItem()) {
     const collection = this.$fire.firestore.collection('works')
-    await collection.add(work.toAJAX)
+    const res = await collection.add(work.toAJAX)
     await dispatch('getWorks')
+    console.log(res, res.id)
+    return res
+  },
+
+  async updateWork({ dispatch, commit }, { id = '', work = new WorkItem() }) {
+    const collection = this.$fire.firestore.collection('works')
+    const res = await collection.doc(id).set(work.toAJAX)
+    await dispatch('getWorks')
+    console.log(res)
+    return res
   }
 }

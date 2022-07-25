@@ -1,10 +1,10 @@
-const prefix = '/iamge'
+const prefix = '/image'
 
 export const actions = {
-  async upload({ commit }, files = []) {
+  async upload({ commit }, { docid = "", files = [] }) {
     const storage = this.$fire.storage.ref()
     const genTask = async (file) => {
-      const targetSrc = `${prefix}/${file.name}`
+      const targetSrc = `${docid || prefix}/${file.name}`
       const res = await storage.child(targetSrc).put(file)
       console.log(res, file.name)
       return targetSrc
@@ -14,6 +14,6 @@ export const actions = {
 
   async download({ commit }, src = '') {
     const storage = this.$fire.storage.ref()
-    return await storage.child(src).getBlob()
+    return await storage.child(src).getDownloadURL()
   }
 }
