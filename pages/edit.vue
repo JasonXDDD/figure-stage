@@ -22,7 +22,7 @@
       </div>
       <div class="">
         <label for="images"> 作品： </label>
-        <input id="images" type="file" accept="image/*" multiple @change="fileChange" />
+        <input id="images" type="file" accept="image/*" class="input-file" multiple @change="fileChange" />
         <div class="mt-2 flex flex-wrap items-center" ref="preview" />
       </div>
     </div>
