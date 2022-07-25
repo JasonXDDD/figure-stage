@@ -50,7 +50,7 @@ export default {
       const images = this.files.map((e) => new ImageItem({ blob: e }))
       const nodes = await Promise.all(images.map((e) => e.image()))
       nodes.forEach((n) => {
-        n.className = 'object-contain bg-slate-400 w-[10rem] h-[10rem] rounded block m-2'
+        n.className = 'object-contain bg-slate-700 w-[10rem] h-[10rem] rounded block m-2'
         this.$refs.preview.append(n)
       })
     },
