@@ -22,6 +22,7 @@ export class WorkItem {
     return this.images.length
   }
 
+
   get toAJAX() {
     return {
       author: this.author,
@@ -29,8 +30,18 @@ export class WorkItem {
       categories: this.categories,
       title: this.title,
       description: this.description,
-      images: this.images
+      images: this.images,
+      createAt: new Date()
     }
+  }
+
+  get cats() {
+    return this.categoriesString
+  }
+
+  set cats(c) {
+    this.categoriesString = c
+    this.categories = c.split(',').filter(e => e).filter((e, i, a) => a.indexOf(e) === i)
   }
 }
 

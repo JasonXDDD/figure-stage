@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="card.id" class="relative">
-    <img :src="card.cover" />
+    <img :src="cover" />
     <div
       class="
         absolute
@@ -35,6 +35,28 @@
 export default {
   name: 'CardItem',
   props: ['card'],
+  data() {
+    return {
+      cover: '',
+    }
+  },
+  watch: {
+    card: {
+      deep: true,
+      async handler(val) {
+        await this.getCover(val.cover)
+      },
+    },
+  },
+
+  async mounted() {
+    await this.getCover(this.card.cover)
+  },
+  methods: {
+    async getCover() {
+      this.cover = await this.$store.dispatch('image/download', this.card.cover)
+    },
+  },
 }
 </script>
 
