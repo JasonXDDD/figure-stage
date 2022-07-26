@@ -23,7 +23,8 @@
 
 <script>
 import circlr from 'circlr'
-import { WORK_ITEM } from '~/interface/work'
+import { WorkItem } from '~/interface/work'
+import { ImageItem } from '~/interface/image'
 
 export default {
   name: 'DetailPage',
@@ -32,17 +33,30 @@ export default {
       loading: true,
       done: 0,
 
-      work: WORK_ITEM,
+      work: new WorkItem(),
       images: [],
-      env: '',
+
+      abortController: new AbortController(),
     }
   },
+  watch: {
+    '$store.state.work.status'(val) {
+      if (val === 'done') {
+        this.work = this.$store.state.work.works.filter((e) => e.id === this.$route.params.id)[0]
+        if (!this.work) this.$router.push('/')
+        else this.init()
+      }
+    },
+  },
   mounted() {
-    this.env = process.env.NODE_ENV
-
-    this.work = this.$store.state.works.filter((e) => e.link === this.$route.params.id)[0]
-    if (!this.work) this.$router.go(-1)
-    else this.init()
+    if (this.$store.state.work.status === 'done') {
+      this.work = this.$store.state.work.works.filter((e) => e.id === this.$route.params.id)[0]
+      if (!this.work) this.$router.push('/')
+      else this.init()
+    }
+  },
+  beforeDestroy() {
+    this.abortController.abort()
   },
   methods: {
     async init() {
@@ -54,8 +68,16 @@ export default {
       this.done = 0
       $(this.$refs.progress).ElasticProgress('open')
 
-      this.images = new Array(this.work.total).fill(0).map((e, i) => `https://jasonxddd.me:9000/figure-stage/${this.work.link}/${i + 1}.JPG`)
-      const items = await Promise.all(this.images.map((e) => this.initImage(e)))
+      const tasks = this.work.images.map((e) => {
+        return new Promise((resolve, reject) => {
+          this.abortController.signal.addEventListener('abort', () => {
+            reject(new Error('abort'))
+          })
+          this.initImage(e).then((r) => resolve(r))
+        })
+      })
+
+      const items = await Promise.all(tasks)
       // append element to dom
       items.forEach((e) => this.buildItem(e))
 
@@ -91,17 +113,19 @@ export default {
       this.$refs.stage.appendChild(item)
     },
 
-    initImage(src) {
+    async initImage(src) {
       const self = this
-      return new Promise((resolve) => {
-        const image = new Image()
-        image.onload = () => {
+      const url = await this.$store.dispatch('image/download', src)
+
+      const target = new ImageItem({
+        url,
+        load() {
           self.done += 1
           $(self.$refs.progress).ElasticProgress('setValue', self.done / self.images.length)
-          resolve(image)
-        }
-        image.src = src
+        },
       })
+
+      return await target.image()
     },
 
     initCirclr() {

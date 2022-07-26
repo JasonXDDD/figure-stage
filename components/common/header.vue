@@ -23,6 +23,7 @@
         <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/"> 作品 </nuxt-link>
         <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/about"> 介紹 </nuxt-link>
         <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/"> GitHub </nuxt-link>
+        <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black bg-cyan-700 px-4 py-2" to="/edit"> 新增作品 </nuxt-link>
       </nav>
     </div>
   </header>

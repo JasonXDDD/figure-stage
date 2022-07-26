@@ -69,13 +69,13 @@ export default {
 
   firebase: {
     config: {
-      apiKey: "AIzaSyCoOrSkURhMUyb3pJgs9CuHUGry2NbRY0U",
-      authDomain: "figure-stage.firebaseapp.com",
-      projectId: "figure-stage",
-      storageBucket: "figure-stage.appspot.com",
-      messagingSenderId: "51011008006",
-      appId: "1:51011008006:web:f6570b0cf2af685d58f587",
-      measurementId: "G-3KZ6BQB23C"
+      apiKey: process.env.FIREBASE_APIKEY,
+      authDomain: process.env.FIREBASE_AUTHDOMAIN,
+      projectId: process.env.FIREBASE_PROJECTID,
+      storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+      appId: process.env.FIREBASE_APPID,
+      measurementId: process.env.FIREBASE_MEASUREMENTID
     },
     services: {
       firestore: true,

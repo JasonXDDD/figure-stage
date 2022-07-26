@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link :to="link" class="relative">
-    <img :src="cover" />
+  <a ref="card" class="relative w-full pt-[100%]" @click="$router.push(card.id)">
+    <img v-if="cover" class="absolute top-0 object-cover bg-slate-700 w-full h-full" :src="cover" />
     <div
       class="
         absolute
@@ -23,18 +23,51 @@
           <img src="https://bottleneko.app/icon.png" class="rounded-full" />
         </div>
         <div>
-          <h2 class="font-bold leading-none text-white">{{ title }}</h2>
-          <small class="text-white/50 font-mono">{{ author }}</small>
+          <h2 class="font-bold leading-none text-white">{{ card.title }}</h2>
+          <small class="text-white/50 font-mono">{{ card.author }}</small>
         </div>
       </div>
     </div>
-  </nuxt-link>
+  </a>
 </template>
 
 <script>
 export default {
   name: 'CardItem',
-  props: ['cover', 'title', 'author', 'link'],
+  props: ['card'],
+  data() {
+    return {
+      cover: '',
+    }
+  },
+
+  computed: {
+    cardWidth() {
+      if (!this.$refs.card) return '100%'
+      else return this.$refs.card.clientWidth + 'px'
+    },
+  },
+  watch: {
+    card: {
+      deep: true,
+      async handler(val) {
+        await this.getCover(val.cover)
+      },
+    },
+  },
+
+  async mounted() {
+    await this.getCover(this.card.cover)
+  },
+  methods: {
+    async getCover() {
+      try {
+        this.cover = await this.$store.dispatch('image/download', this.card.cover)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  },
 }
 </script>
 
