@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link :to="card.id" class="relative">
-    <img :src="cover" />
+  <a ref="card" class="relative w-full pt-[100%]" @click="$router.push(card.id)">
+    <img v-if="cover" class="absolute top-0 object-cover bg-slate-700 w-full h-full" :src="cover" />
     <div
       class="
         absolute
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-  </nuxt-link>
+  </a>
 </template>
 
 <script>
@@ -39,6 +39,13 @@ export default {
     return {
       cover: '',
     }
+  },
+
+  computed: {
+    cardWidth() {
+      if (!this.$refs.card) return '100%'
+      else return this.$refs.card.clientWidth + 'px'
+    },
   },
   watch: {
     card: {
@@ -54,7 +61,11 @@ export default {
   },
   methods: {
     async getCover() {
-      this.cover = await this.$store.dispatch('image/download', this.card.cover)
+      try {
+        this.cover = await this.$store.dispatch('image/download', this.card.cover)
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

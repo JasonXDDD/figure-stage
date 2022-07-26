@@ -1,6 +1,6 @@
 <template>
   <div class="text-white/50">
-    <div class="grid grid-cols-2 pad:grid-cols-6 gap-0">
+    <div class="grid items-stretch grid-cols-2 pad:grid-cols-6 gap-0">
       <card-item v-for="(e, i) in $store.state.work.works" :key="i" :card="e" />
     </div>
   </div>
@@ -18,7 +18,6 @@ export default {
   },
   mounted() {
     console.log('<<<<<', process.env.NODE_ENV)
-    this.$store.dispatch('work/getWorks')
   },
 }
 </script>

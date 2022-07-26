@@ -35,15 +35,28 @@ export default {
 
       work: new WorkItem(),
       images: [],
-      env: '',
+
+      abortController: new AbortController(),
     }
   },
+  watch: {
+    '$store.state.work.status'(val) {
+      if (val === 'done') {
+        this.work = this.$store.state.work.works.filter((e) => e.id === this.$route.params.id)[0]
+        if (!this.work) this.$router.push('/')
+        else this.init()
+      }
+    },
+  },
   mounted() {
-    this.env = process.env.NODE_ENV
-
-    this.work = this.$store.state.work.works.filter((e) => e.id === this.$route.params.id)[0]
-    if (!this.work) this.$router.push('/')
-    else this.init()
+    if (this.$store.state.work.status === 'done') {
+      this.work = this.$store.state.work.works.filter((e) => e.id === this.$route.params.id)[0]
+      if (!this.work) this.$router.push('/')
+      else this.init()
+    }
+  },
+  beforeDestroy() {
+    this.abortController.abort()
   },
   methods: {
     async init() {
@@ -55,7 +68,16 @@ export default {
       this.done = 0
       $(this.$refs.progress).ElasticProgress('open')
 
-      const items = await Promise.all(this.work.images.map((e) => this.initImage(e)))
+      const tasks = this.work.images.map((e) => {
+        return new Promise((resolve, reject) => {
+          this.abortController.signal.addEventListener('abort', () => {
+            reject(new Error('abort'))
+          })
+          this.initImage(e).then((r) => resolve(r))
+        })
+      })
+
+      const items = await Promise.all(tasks)
       // append element to dom
       items.forEach((e) => this.buildItem(e))
 
