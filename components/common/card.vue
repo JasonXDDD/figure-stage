@@ -1,6 +1,6 @@
 <template>
   <a ref="card" class="relative w-full pt-[100%]" @click="$router.push(card.id)">
-    <img v-if="cover" class="absolute top-0 object-cover bg-slate-700 w-full h-full" :src="cover" />
+    <img class="absolute top-0 object-cover bg-slate-700 w-full h-full" :src="card.cover" />
     <div
       class="
         absolute
@@ -35,39 +35,6 @@
 export default {
   name: 'CardItem',
   props: ['card'],
-  data() {
-    return {
-      cover: '',
-    }
-  },
-
-  computed: {
-    cardWidth() {
-      if (!this.$refs.card) return '100%'
-      else return this.$refs.card.clientWidth + 'px'
-    },
-  },
-  watch: {
-    card: {
-      deep: true,
-      async handler(val) {
-        await this.getCover(val.cover)
-      },
-    },
-  },
-
-  async mounted() {
-    await this.getCover(this.card.cover)
-  },
-  methods: {
-    async getCover() {
-      try {
-        this.cover = await this.$store.dispatch('image/download', this.card.cover)
-      } catch (e) {
-        console.log(e)
-      }
-    },
-  },
 }
 </script>
 

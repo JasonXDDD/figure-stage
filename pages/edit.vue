@@ -24,14 +24,14 @@
         <label for="cover"> 封面： </label>
         <input id="cover" type="file" accept="image/*" class="input-file" @change="coverChange" />
         <!-- empty -->
-        <div v-if="!cover" class="mt-2 rounded-md h-[10rem] w-[10rem] bg-white/10 grid place-items-center">
+        <div v-if="!cover.src" class="mt-2 rounded-md h-[10rem] w-[10rem] bg-white/10 grid place-items-center">
           <div class="flex items-center">
             <outline-emoji-sad-icon class="w-6 h-6 mr-1" />
             <span>沒東西</span>
           </div>
         </div>
 
-        <img v-else :src="coverUrl" class="mt-2 object-cover bg-slate-700 w-[10rem] h-[10rem] rounded block" />
+        <img v-else :src="cover.src" class="mt-2 object-cover bg-slate-700 w-[10rem] h-[10rem] rounded block" />
       </div>
       <div class="">
         <label for="images"> 作品： </label>
@@ -70,6 +70,7 @@
 <script>
 import draggable from 'vuedraggable'
 import { WorkItem } from '~/interface/work'
+import { ImageItem } from '~/interface/image'
 
 export default {
   name: 'EditPage',
@@ -81,7 +82,7 @@ export default {
       files: [],
       drag: false,
       work: new WorkItem(),
-      cover: null,
+      cover: new ImageItem(),
 
       status: '',
     }
@@ -96,19 +97,20 @@ export default {
         ghostClass: 'ghost',
       }
     },
-    coverUrl() {
-      return URL.createObjectURL(this.cover)
-    },
+  },
+
+  mounted() {
+    console.log(process.env.IMAGE_SERVER)
   },
 
   methods: {
     coverChange(e) {
-      this.cover = e.target.files[0]
+      this.cover = new ImageItem({ blob: e.target.files[0] })
     },
     fileChange(e) {
       this.files = Array.from(e.target.files).map((e, i) => ({
         id: i,
-        data: e,
+        data: new ImageItem({ blob: e }),
         image: URL.createObjectURL(e),
       }))
     },
@@ -122,12 +124,15 @@ export default {
         this.status = 'loading'
         // const { cover, files } = this.outputFiles({ cover: this.cover, files: this.files })
         const target = await this.$store.dispatch('work/addWork', this.work)
-        const res = await this.$store.dispatch('image/upload', { docid: target.id, files: [this.files.map((e) => e.data), this.cover].flat() })
+        const res = await this.$store.dispatch('image/uploads', {
+          id: target.id,
+          files: [this.files.map((e) => e.data), this.cover].flat(),
+        })
         this.work.cover = res.pop()
         this.work.images = res
         await this.$store.dispatch('work/updateWork', { id: target.id, work: this.work })
         this.status = ''
-        this.$roter.push('/')
+        this.$router.push('/')
       } catch (e) {
         console.error(e)
       }

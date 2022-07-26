@@ -9,14 +9,20 @@
     </section>
 
     <section class="p-4">
-      <h2 class="font-bold leading-none text-white text-2xl">{{ work.title }}</h2>
+      <div class="flex items-center gap-1">
+        <div v-for="(cat, catid) in work.categories" :key="`cat-${catid}`" class="px-1 rounded-md bg-cyan-600 text-white text-xs font-bold">
+          {{ cat }}
+        </div>
+      </div>
+      <h2 class="mt-2 font-bold leading-none text-white text-2xl">{{ work.title }}</h2>
       <div class="w-full mt-2 flex items-center space-x-2">
         <div class="rounded-full h-6 w-6 bg-slate-800">
           <img src="https://bottleneko.app/icon.png" class="rounded-full" />
         </div>
         <small class="text-gray-500 font-mono">{{ work.author }}</small>
       </div>
-      <div></div>
+      <hr class="border-white/20 my-4" />
+      <p class="text-white whitespace-pre-line">{{ work.description }}</p>
     </section>
   </div>
 </template>
@@ -113,10 +119,8 @@ export default {
       this.$refs.stage.appendChild(item)
     },
 
-    async initImage(src) {
+    async initImage(url) {
       const self = this
-      const url = await this.$store.dispatch('image/download', src)
-
       const target = new ImageItem({
         url,
         load() {

@@ -40,7 +40,7 @@ jobs:
           FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
           FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
           FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
-
+          IMAGE_SERVER: ${{ secrets.IMAGE_SERVER }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

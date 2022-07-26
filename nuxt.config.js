@@ -67,6 +67,10 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
+  env: {
+    IMAGE_SERVER: process.env.IMAGE_SERVER
+  },
+
   firebase: {
     config: {
       apiKey: process.env.FIREBASE_APIKEY,

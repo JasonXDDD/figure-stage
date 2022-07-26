@@ -20,10 +20,10 @@
       }"
     >
       <nav ref="nav" class="flex flex-col pt-8">
-        <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/"> 作品 </nuxt-link>
-        <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/about"> 介紹 </nuxt-link>
-        <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black px-4 py-2" to="/"> GitHub </nuxt-link>
-        <nuxt-link @click="isShow = false" class="hover:bg-white hover:text-black bg-cyan-700 px-4 py-2" to="/edit"> 新增作品 </nuxt-link>
+        <a @click="routeTo('/')" class="hover:bg-white hover:text-black px-4 py-2"> 作品 </a>
+        <a @click="routeTo('/about')" class="hover:bg-white hover:text-black px-4 py-2"> 介紹 </a>
+        <a @click="routeTo('/')" class="hover:bg-white hover:text-black px-4 py-2"> GitHub </a>
+        <a @click="routeTo('/edit')" class="hover:bg-white hover:text-black bg-cyan-700 px-4 py-2"> 新增作品 </a>
       </nav>
     </div>
   </header>
@@ -44,8 +44,21 @@ export default {
     },
   },
 
+  watch: {
+    '$route.path'() {
+      this.isShow = false
+    },
+  },
+
   mounted() {
     this.isPad = window.innerWidth >= 640
+  },
+
+  methods: {
+    routeTo(link) {
+      this.isShow = false
+      this.$router.push(link)
+    },
   },
 }
 </script>
