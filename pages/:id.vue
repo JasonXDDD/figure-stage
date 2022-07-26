@@ -40,7 +40,6 @@ export default {
       done: 0,
 
       work: new WorkItem(),
-      images: [],
 
       abortController: new AbortController(),
     }
@@ -125,7 +124,7 @@ export default {
         url,
         load() {
           self.done += 1
-          $(self.$refs.progress).ElasticProgress('setValue', self.done / self.images.length)
+          $(self.$refs.progress).ElasticProgress('setValue', self.done / self.work.images.length)
         },
       })
 
