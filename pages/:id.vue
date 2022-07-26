@@ -139,8 +139,8 @@ export default {
         .play()
     },
 
-    formatTime(t = new Date(), ff = '', tf = 'YYYY-MM-DD') {
-      return moment(t, ff).format(tf)
+    formatTime(t = null, ff = '', tf = 'YYYY-MM-DD') {
+      return moment(t? t.toMillis(): new Date(), ff).format(tf)
     },
   },
 }
