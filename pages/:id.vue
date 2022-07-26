@@ -19,7 +19,7 @@
         <div class="rounded-full h-6 w-6 bg-slate-800">
           <img src="https://bottleneko.app/icon.png" class="rounded-full" />
         </div>
-        <small class="text-gray-500 font-mono">{{ work.author }}</small>
+        <small class="text-gray-500 font-mono"> {{ work.author }} 於 {{ formatTime(work.createAt) }} 發佈 </small>
       </div>
       <hr class="border-white/20 my-4" />
       <p class="text-white whitespace-pre-line">{{ work.description }}</p>
@@ -29,6 +29,7 @@
 
 <script>
 import circlr from 'circlr'
+import moment from 'moment'
 import { WorkItem } from '~/interface/work'
 import { ImageItem } from '~/interface/image'
 
@@ -136,6 +137,10 @@ export default {
         .scroll(true)
         // .interval(300)
         .play()
+    },
+
+    formatTime(t = new Date(), ff = '', tf = 'YYYY-MM-DD') {
+      return moment(t, ff).format(tf)
     },
   },
 }

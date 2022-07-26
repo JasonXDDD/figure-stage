@@ -58,10 +58,17 @@
 
       <div class="flex justify-end">
         <button class="rounded-md bg-white hover:bg-cyan-500 font-bold text-slate-700 hover:text-white flex items-center p-2" @click="doSubmit">
-          {{ status === 'loading' ? '處理中' : '提交作品' }}
-          <outline-cog-icon v-if="status === 'loading'" class="animate-spin ml-20 h-6 w-6" />
+          {{ process ? '處理中' : '提交作品' }}
+          <outline-cog-icon v-if="process" class="animate-spin ml-20 h-6 w-6" />
           <outline-arrow-right-icon v-else class="ml-20 h-6 w-6" />
         </button>
+      </div>
+    </div>
+
+    <div class="fixed top-0 left-0 w-screen h-screen z-10 bg-white/10 text-white grid place-items-center" v-if="process">
+      <div class="flex items-center">
+        <outline-cog-icon class="h-8 w8 animate-spin mr-1" />
+        <span class="font-bold">{{ process }}</span>
       </div>
     </div>
   </div>
@@ -84,7 +91,7 @@ export default {
       work: new WorkItem(),
       cover: new ImageItem(),
 
-      status: '',
+      process: '',
     }
   },
 
@@ -121,18 +128,26 @@ export default {
 
     async doSubmit() {
       try {
-        this.status = 'loading'
+        this.process = '上傳作品'
         // const { cover, files } = this.outputFiles({ cover: this.cover, files: this.files })
         const target = await this.$store.dispatch('work/addWork', this.work)
+
+        this.process = '上傳圖片'
         const res = await this.$store.dispatch('image/uploads', {
           id: target.id,
           files: [this.files.map((e) => e.data), this.cover].flat(),
         })
         this.work.cover = res.pop()
         this.work.images = res
+
+        this.process = '更新作品內容'
         await this.$store.dispatch('work/updateWork', { id: target.id, work: this.work })
-        this.status = ''
-        this.$router.push('/')
+
+        this.process = '完成！'
+        setTimeout(() => {
+          this.process = ''
+          this.$router.push('/')
+        }, 1000)
       } catch (e) {
         console.error(e)
       }

@@ -1,5 +1,5 @@
+import * as _ from "lodash"
 import { WorkItem } from "~/interface/work"
-
 
 export const state = () => {
   return {
@@ -31,7 +31,7 @@ export const actions = {
       return new WorkItem(item)
     })
 
-    commit('updateWorks', works)
+    commit('updateWorks', _.orderBy(works, ['createAt'], ['desc']))
     commit('updateStatus', 'done')
   },
 

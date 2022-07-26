@@ -16,6 +16,7 @@ export class WorkItem {
     this.categories = data.categories || []
     this.images = data.images || []
     this.id = data.id || ''
+    this.createAt = data.createAt
   }
 
   get total() {
