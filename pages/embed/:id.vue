@@ -1,36 +1,30 @@
 
 <template>
   <div>
-    <section class="h-[75vh] pad:h-[80vh] w-auto grid place-items-center overflow-hidden bg-slate-800/50">
+    <section class="h-screen w-screen grid place-items-center overflow-hidden bg-slate-800/50">
       <div class="w-screen pad:w-80 px-12 pad:px-0">
         <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
       </div>
       <div v-show="!loading" ref="stage" />
     </section>
 
-    <section class="p-4">
-      <div class="flex items-center gap-1">
-        <div v-for="(cat, catid) in work.categories" :key="`cat-${catid}`" class="px-1 rounded-md bg-cyan-600 text-white text-xs font-bold">
-          {{ cat }}
+    <div class="fixed bottom-0 w-full p-4 bg-gradient-to-t from-black/80 flex items-end">
+      <div>
+        <h2 class="mt-2 font-bold leading-none text-white text-2xl hover:text-cyan-500 cursor-pointer" @click="$router.push(`/${$route.params.id}`)">
+          {{ work.title }}
+        </h2>
+        <div class="w-full mt-2 flex items-center space-x-2">
+          <div class="rounded-full h-6 w-6 bg-slate-800">
+            <img src="icon.png" class="rounded-full" />
+          </div>
+          <small class="text-gray-500 font-mono"> {{ work.author }} 於 {{ formatTime(work.createAt) }} 發佈 </small>
         </div>
       </div>
-      <h2 class="mt-2 font-bold leading-none text-white text-2xl">{{ work.title }}</h2>
-      <div class="w-full mt-2 flex items-center space-x-2">
-        <div class="rounded-full h-6 w-6 bg-slate-800">
-          <img src="icon.png" class="rounded-full" />
-        </div>
-        <small class="text-gray-500 font-mono"> {{ work.author }} 於 {{ formatTime(work.createAt) }} 發佈 </small>
-        <button
-          class="p-1 rounded-md bg-slate-500 hover:bg-slate-700 text-white flex items-center"
-          @click="$router.push(`/embed/${$route.params.id}`)"
-        >
-          <outline-share-icon class="h-4 w-4" />
-          <span class="text-xs font-bold ml-1">分享</span>
-        </button>
-      </div>
-      <hr class="border-white/20 my-4" />
-      <p class="text-white whitespace-pre-line">{{ work.description }}</p>
-    </section>
+
+      <button class="ml-auto opacity-20 hover:opacity-80" @click="$router.push('/')">
+        <img src="icon-white.svg" class="h-12 w-12" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -42,13 +36,12 @@ import { ImageItem } from '~/interface/image'
 
 export default {
   name: 'DetailPage',
+  layout: 'embed',
   data() {
     return {
       loading: true,
       done: 0,
-
       work: new WorkItem(),
-
       abortController: new AbortController(),
     }
   },
@@ -120,7 +113,7 @@ export default {
       img.style['-webkit-backdrop-filter'] = 'blur(24px)'
 
       const item = document.createElement('div')
-      item.className = 'h-[75vh] pad:h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
+      item.className = 'h-screen w-screen bg-cover bg-no-repeat bg-center'
       item.style['background-image'] = `url(${img.src})`
       item.appendChild(img)
       this.$refs.stage.appendChild(item)

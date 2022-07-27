@@ -20,7 +20,7 @@
     >
       <div class="w-full mt-auto flex items-center space-x-2">
         <div class="rounded-full h-8 w-8 bg-slate-800">
-          <img src="https://bottleneko.app/icon.png" class="rounded-full" />
+          <img src="icon.png" class="rounded-full" />
         </div>
         <div>
           <h2 class="font-bold leading-none text-white">{{ card.title }}</h2>
