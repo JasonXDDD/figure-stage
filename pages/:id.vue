@@ -20,10 +20,7 @@
           <img src="icon.png" class="rounded-full" />
         </div>
         <small class="text-gray-500 font-mono"> {{ work.author }} 於 {{ formatTime(work.createAt) }} 發佈 </small>
-        <button
-          class="p-1 rounded-md bg-slate-500 hover:bg-slate-700 text-white flex items-center"
-          @click="$router.push(`/embed/${$route.params.id}`)"
-        >
+        <button class="p-1 rounded-md bg-slate-500 hover:bg-slate-700 text-white flex items-center" @click="isShare = true">
           <outline-share-icon class="h-4 w-4" />
           <span class="text-xs font-bold ml-1">分享</span>
         </button>
@@ -31,6 +28,8 @@
       <hr class="border-white/20 my-4" />
       <p class="text-white whitespace-pre-line">{{ work.description }}</p>
     </section>
+
+    <share-modal :is-show="isShare" @close="isShare = false" />
   </div>
 </template>
 
@@ -39,17 +38,18 @@ import circlr from 'circlr'
 import moment from 'moment'
 import { WorkItem } from '~/interface/work'
 import { ImageItem } from '~/interface/image'
+import ShareModal from '~/components/share-modal.vue'
 
 export default {
   name: 'DetailPage',
+  components: { ShareModal },
   data() {
     return {
       loading: true,
       done: 0,
-
       work: new WorkItem(),
-
       abortController: new AbortController(),
+      isShare: false,
     }
   },
   watch: {
@@ -70,17 +70,16 @@ export default {
   },
   beforeDestroy() {
     this.abortController.abort()
+    if (this.$refs.progress) this.$refs.progress.remove()
   },
   methods: {
     async init() {
       // init progress
       this.initProgress()
-
       // start loading data
       this.loading = true
       this.done = 0
       $(this.$refs.progress).ElasticProgress('open')
-
       const tasks = this.work.images.map((e) => {
         return new Promise((resolve, reject) => {
           this.abortController.signal.addEventListener('abort', () => {
@@ -89,22 +88,18 @@ export default {
           this.initImage(e).then((r) => resolve(r))
         })
       })
-
       const items = await Promise.all(tasks)
       // append element to dom
       items.forEach((e) => this.buildItem(e))
-
       // render stage
       setTimeout(() => {
         this.initCirclr()
-
         // reest progress
         $(this.$refs.progress).ElasticProgress('close')
         this.done = 0
         this.loading = false
       }, 1000)
     },
-
     initProgress() {
       $(this.$refs.progress).ElasticProgress({
         buttonSize: 60,
@@ -113,19 +108,16 @@ export default {
         colorFg: '#7cc576',
       })
     },
-
     buildItem(img) {
       img.className = 'object-contain w-full h-full mx-auto backdrop-blur-xl'
       img.style['backdrop-filter'] = 'blur(24px)'
       img.style['-webkit-backdrop-filter'] = 'blur(24px)'
-
       const item = document.createElement('div')
       item.className = 'h-[75vh] pad:h-[80vh] w-auto bg-cover bg-no-repeat bg-center'
       item.style['background-image'] = `url(${img.src})`
       item.appendChild(img)
       this.$refs.stage.appendChild(item)
     },
-
     async initImage(url) {
       const self = this
       const target = new ImageItem({
@@ -135,17 +127,14 @@ export default {
           $(self.$refs.progress).ElasticProgress('setValue', self.done / self.work.images.length)
         },
       })
-
       return await target.image()
     },
-
     initCirclr() {
       circlr(this.$refs.stage)
         .scroll(true)
         // .interval(300)
         .play()
     },
-
     formatTime(t = null, ff = '', tf = 'YYYY-MM-DD') {
       return moment(t ? t.toMillis() : new Date(), ff).format(tf)
     },

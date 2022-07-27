@@ -3,9 +3,9 @@
   <div>
     <section class="h-screen w-screen grid place-items-center overflow-hidden bg-slate-800/50">
       <div class="w-screen pad:w-80 px-12 pad:px-0">
-        <div v-show="loading" ref="progress" role="button" aria-label="Upload file" />
+        <div v-show="loading" ref="previewProgress" role="button" aria-label="Upload file" />
       </div>
-      <div v-show="!loading" ref="stage" />
+      <div v-show="!loading" ref="previewStage" />
     </section>
 
     <div class="fixed bottom-0 w-full p-4 bg-gradient-to-t from-black/80 flex items-end">
@@ -63,6 +63,7 @@ export default {
   },
   beforeDestroy() {
     this.abortController.abort()
+    if (this.$refs.previewProgress) this.$refs.previewProgress.remove()
   },
   methods: {
     async init() {
@@ -72,7 +73,7 @@ export default {
       // start loading data
       this.loading = true
       this.done = 0
-      $(this.$refs.progress).ElasticProgress('open')
+      $(this.$refs.previewProgress).ElasticProgress('open')
 
       const tasks = this.work.images.map((e) => {
         return new Promise((resolve, reject) => {
@@ -92,14 +93,14 @@ export default {
         this.initCirclr()
 
         // reest progress
-        $(this.$refs.progress).ElasticProgress('close')
+        $(this.$refs.previewProgress).ElasticProgress('close')
         this.done = 0
         this.loading = false
       }, 1000)
     },
 
     initProgress() {
-      $(this.$refs.progress).ElasticProgress({
+      $(this.$refs.previewProgress).ElasticProgress({
         buttonSize: 60,
         fontFamily: 'Montserrat',
         colorBg: '#adeca8',
@@ -116,7 +117,7 @@ export default {
       item.className = 'h-screen w-screen bg-cover bg-no-repeat bg-center'
       item.style['background-image'] = `url(${img.src})`
       item.appendChild(img)
-      this.$refs.stage.appendChild(item)
+      this.$refs.previewStage.appendChild(item)
     },
 
     async initImage(url) {
@@ -125,7 +126,7 @@ export default {
         url,
         load() {
           self.done += 1
-          $(self.$refs.progress).ElasticProgress('setValue', self.done / self.work.images.length)
+          $(self.$refs.previewProgress).ElasticProgress('setValue', self.done / self.work.images.length)
         },
       })
 
@@ -133,7 +134,7 @@ export default {
     },
 
     initCirclr() {
-      circlr(this.$refs.stage)
+      circlr(this.$refs.previewStage)
         .scroll(true)
         // .interval(300)
         .play()
