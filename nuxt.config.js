@@ -15,7 +15,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'figure-stage',
+    title: '展示舞台 FigureStage',
     meta: [],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -34,6 +34,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '@/plugins/mixins.js' },
     { src: '@/plugins/pwa-update.js' },
     { src: '@/plugins/vClickOutside.js' },
   ],
@@ -102,8 +103,8 @@ export default {
       name: '展示舞台 FigureStage',
       author: 'JasonXDDD',
       description: `360 rotate picture & display platform`,
-      theme_color: '#e5e5e5',
-      background_color: '#e5e5e5',
+      theme_color: '#272c35',
+      background_color: '#272c35',
       lang: 'zh-TW',
       ogHost: 'https://jasonxddd.github.io/figure-stage',
       nativeUI: true,
@@ -115,7 +116,7 @@ export default {
       display: 'standalone',
       start_url: 'https://jasonxddd.github.io/figure-stage/?standalone=true',
       description: `360 rotate picture & display platform`,
-      background_color: '#e5e5e5',
+      background_color: '#272c35',
       lang: 'zh-TW',
       orientation: 'portrait',
       // useWebmanifestExtension: true,

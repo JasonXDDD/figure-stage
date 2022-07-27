@@ -80,6 +80,9 @@ export default {
   data() {
     return {}
   },
+  head() {
+    return this.genMeta(`關於我 | FigureStage`)
+  },
   mounted() {
     console.log('<<<<<', process.env.NODE_ENV)
   },

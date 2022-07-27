@@ -1,7 +1,7 @@
 
 <template>
   <div class="p-4 pad:px-0 pad:py-8 w-full pad:w-[60rem] mx-auto leading-relaxed font-mono">
-    <h2 class="title text-white/80">編輯作品</h2>
+    <h2 class="title text-white/80">新增作品</h2>
 
     <div class="space-y-6 mt-8 text-white">
       <div class="">
@@ -93,6 +93,9 @@ export default {
 
       process: '',
     }
+  },
+  head() {
+    return this.genMeta(`新增作品| FigureStage`)
   },
 
   computed: {

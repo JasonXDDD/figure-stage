@@ -16,6 +16,9 @@ export default {
       files: [],
     }
   },
+  head() {
+    return this.genMeta()
+  },
   mounted() {
     console.log('<<<<<', process.env.NODE_ENV)
   },

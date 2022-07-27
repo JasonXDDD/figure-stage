@@ -52,6 +52,9 @@ export default {
       isShare: false,
     }
   },
+  head() {
+    return this.genMeta(`${this.work.title} | FigureStage`, this.work.description, this.work.cover)
+  },
   watch: {
     '$store.state.work.status'(val) {
       if (val === 'done') {
