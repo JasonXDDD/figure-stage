@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW" {{ HTML_ATTRS }} data-theme="light">
+  <head {{ HEAD_ATTRS }}>
+    <title>展示舞台 FigureStage</title>
+    <meta
+      data-n-head="1"
+      data-hid="viewport"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, minimal-ui"
+    />
+    <meta data-n-head="1" data-hid="theme-color" property="theme-color" content="#272c35" />
+    <meta
+      data-n-head="1"
+      data-hid="description"
+      property="description"
+      content=" FigureStage 是一個 360度環繞 展示模型作品的網站，您只需要拍攝各個角度的照片，透過網站上傳您的作品，就能夠完美展示環繞效果，並且您可以嵌入至任何網站或文章。"
+    />
+    <meta data-n-head="1" data-hid="og:type" property="og:type" content="article" />
+    <meta data-n-head="1" data-hid="og:title" property="og:title" content="展示舞台 FigureStage" />
+    <meta
+      data-n-head="1"
+      data-hid="og:description"
+      property="og:description"
+      content=" FigureStage 是一個 360度環繞 展示模型作品的網站，您只需要拍攝各個角度的照片，透過網站上傳您的作品，就能夠完美展示環繞效果，並且您可以嵌入至任何網站或文章。"
+    />
+    <meta data-n-head="1" data-hid="og:url" property="og:url" content="https://jasonxddd.github.io/figure-stage" />
+    <meta data-n-head="1" data-hid="og:site_name" property="og:site_name" content="展示舞台 FigureStage" />
+    <meta data-n-head="1" data-hid="og:image" property="og:image" content="https://jasonxddd.github.io/figure-stage/cover.png" />
+    <meta data-n-head="1" data-hid="twitter:card" property="twitter:card" content="summary" />
+    <meta data-n-head="1" data-hid="twitter:title" property="twitter:title" content="展示舞台 FigureStage" />
+    <meta
+      data-n-head="1"
+      data-hid="twitter:description"
+      property="twitter:description"
+      content=" FigureStage 是一個 360度環繞 展示模型作品的網站，您只需要拍攝各個角度的照片，透過網站上傳您的作品，就能夠完美展示環繞效果，並且您可以嵌入至任何網站或文章。"
+    />
+    <meta data-n-head="1" data-hid="twitter:image" property="twitter:image" content="https://jasonxddd.github.io/figure-stage/cover.png" />
+
+    {{ HEAD }}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3KZ6BQB23C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag () {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-3KZ6BQB23C')
+    </script>
+  </head>
+
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+
+    <script>
+      const forceSWupdate = () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(registrations => {
+            for (const registration of registrations) {
+              registration.update()
+            }
+          })
+        }
+      }
+    </script>
+  </body>
+</html>
